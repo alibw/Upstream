@@ -1,0 +1,22 @@
+POST http://localhost:5094/StoreAndRetrieve
+Accept: application/json, text/plain, */*
+Connection: keep-alive
+Host: localhost:5094
+User-Agent: axios/1.6.5
+Accept-Encoding: gzip, compress, deflate, br
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 42
+
+{
+  "foo": 1,
+  "bar": true,
+  "text": "Send Request"
+}
+
+/*
+HTTP/1.1 200
+Content-Type: application/json
+Content-Length: 42
+
+{"foo":1,"bar":true,"text":"Send Request"}
+ */
