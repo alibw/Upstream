@@ -1,4 +1,3 @@
-using System.Text.Json;
 using System.Text.Json.Nodes;
 using Dummy;
 using Server;
@@ -9,12 +8,12 @@ app.UseMiddleware<RecordMiddleware>("Server");
 
 var lastResponse = string.Empty;
 
-var connectionString = "Server=NUC\\SQLEXPRESS;Database=outbox;Integrated Security=True;TrustServerCertificate=true;";
+var connectionString = "Server=NUC;Database=Northwind;Integrated Security=True;TrustServerCertificate=true;";
 
-app.MapPost("/Insert", (JsonNode requestBody) =>
+app.MapPost("/Insert", (JsonNode requestBody, HttpContext context) =>
 {
-    var outboxRepository = new OutboxRepository(connectionString);
-    return outboxRepository.Insert(requestBody);
+    var dbRepository = new DbRepository(connectionString);
+    return dbRepository.Insert( requestBody["type"].ToString(), requestBody["payload"]);
 });
 
 app.MapPost("/Products", () =>
